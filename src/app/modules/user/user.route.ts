@@ -9,4 +9,7 @@ const router = Router()
 // Create User
 router.post('/',validateRequest(UserValidation.createUserValidationSchema), UserController.createUser)
 
+// Get All Users
+router.get('/', UserController.getAllUsers)
+
 export const UserRoutes = router;
