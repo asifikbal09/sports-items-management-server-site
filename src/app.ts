@@ -7,6 +7,7 @@ import express, {
 import cors from "cors";
 import config from "./app/config";
 import router from "./app/routes";
+import httpStatus from "http-status";
 
 const app: Application = express();
 
@@ -14,7 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
-  res.status(200).send({
+  res.status(httpStatus.OK).send({
     success: true,
     message: "Welcome to the Sports Items Management API",
   });
@@ -23,7 +24,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/api", router);
 
 app.use((req: Request, res: Response) => {
-  res.status(404).send({
+  res.status(httpStatus.NOT_FOUND).send({
     success: false,
     message: "Route not found",
   });
@@ -31,7 +32,7 @@ app.use((req: Request, res: Response) => {
 
 // Global Error Handler
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
-  let statusCode = 500;
+  let statusCode = httpStatus.INTERNAL_SERVER_ERROR;
   let message = "Something went wrong!";
   let errorMessage = "Something went wrong!";
   let errorDetails = err;
