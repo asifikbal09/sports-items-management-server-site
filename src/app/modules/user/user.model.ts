@@ -1,5 +1,6 @@
 import { model, Schema } from "mongoose";
 import { IUser } from "./user.interface";
+import { userRolesEnum } from "./user.constant";
 
 const userSchema = new Schema<IUser>(
   {
@@ -18,7 +19,7 @@ const userSchema = new Schema<IUser>(
     },
     role: {
       type: String,
-      enum: ["admin", "manager", "seller"],
+      enum: userRolesEnum,
       required: true,
     },
     imgUrl: {
