@@ -1,6 +1,12 @@
-import express, { Application, ErrorRequestHandler, Request, Response } from "express";
+import express, {
+  Application,
+  ErrorRequestHandler,
+  Request,
+  Response,
+} from "express";
 import cors from "cors";
 import config from "./app/config";
+import router from "./app/routes";
 
 const app: Application = express();
 
@@ -14,9 +20,7 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
-app.get("/error", (req: Request, res: Response) => {
-  throw new Error("This is a test error");
-});
+app.use("/api", router);
 
 app.use((req: Request, res: Response) => {
   res.status(404).send({
@@ -25,14 +29,13 @@ app.use((req: Request, res: Response) => {
   });
 });
 
-
 // Global Error Handler
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   let statusCode = 500;
-  let message = 'Something went wrong!';
-  let errorMessage = 'Something went wrong!';
+  let message = "Something went wrong!";
+  let errorMessage = "Something went wrong!";
   let errorDetails = err;
-  let stack = config.NODE_ENV === 'development' ? err?.stack : null;
+  let stack = config.NODE_ENV === "development" ? err?.stack : null;
 
   return res.status(statusCode).json({
     success: false,
