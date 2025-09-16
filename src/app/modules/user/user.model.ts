@@ -1,8 +1,10 @@
 import { model, Schema } from "mongoose";
-import { IUser } from "./user.interface";
+import { IUser, UserModel } from "./user.interface";
 import { userRolesEnum } from "./user.constant";
+import bcrypt from "bcrypt";
+import config from "../../config";
 
-const userSchema = new Schema<IUser>(
+const userSchema = new Schema<IUser, UserModel>(
   {
     name: {
       type: String,
@@ -43,4 +45,20 @@ const userSchema = new Schema<IUser>(
   }
 );
 
-export const User = model<IUser>("User", userSchema);
+//Using mongoose pre hook for password hashing before saving data into database
+userSchema.pre("save", async function (next) {
+  const password = this.password;
+  const hashedPassword = await bcrypt.hash(password, Number(config.salt_rounds));
+  this.password = hashedPassword;
+
+  next();
+});
+
+userSchema.statics.isPasswordMatched = async function (
+  planeTextPassword: string,
+  hashedPassword: string
+) {
+  return await bcrypt.compare(planeTextPassword, hashedPassword);
+};
+
+export const User = model<IUser, UserModel>("User", userSchema);
