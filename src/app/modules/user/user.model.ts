@@ -16,11 +16,13 @@ const userSchema = new Schema<IUser>(
     password: {
       type: String,
       required: true,
+      select: false,
     },
     role: {
       type: String,
       enum: userRolesEnum,
       required: true,
+      default: "seller",
     },
     imgUrl: {
       type: String,
@@ -30,6 +32,10 @@ const userSchema = new Schema<IUser>(
     },
     contactNo: {
       type: String,
+    },
+    isPasswordChanged: {
+      type: Boolean,
+      default: false,
     },
   },
   {
