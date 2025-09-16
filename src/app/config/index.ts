@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import path from 'path';
-
+import type { StringValue } from "ms";
 
 dotenv.config({ path: path.join(process.cwd(), '.env') });
 
@@ -11,7 +11,7 @@ export default{
     default_password: process.env.DEFAULT_PASSWORD,
     refresh_secret_key: process.env.REFRESH_SECRET_KEY ,
     access_secret_key: process.env.ACCESS_SECRET_KEY,
-    refresh_jwt_expires_in: process.env.REFRESH_JWT_EXPIRES_IN,
-    access_jwt_expires_in: process.env.ACCESS_JWT_EXPIRES_IN,
+    refresh_jwt_expires_in: process.env.REFRESH_JWT_EXPIRES_IN as StringValue,
+    access_jwt_expires_in: process.env.ACCESS_JWT_EXPIRES_IN as StringValue,
     salt_rounds: process.env.SALT_ROUNDS
 }

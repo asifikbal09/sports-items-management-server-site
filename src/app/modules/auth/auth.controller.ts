@@ -1,3 +1,4 @@
+import { setRefreshTokenCookie } from "../../utils/auth.utils";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import { AuthService } from "./auth.service";
@@ -14,6 +15,22 @@ const createUser = catchAsync(async (req, res) => {
   })
 });
 
+const userLogin = catchAsync(async (req, res) => {
+  const loginInfo = req.body;
+  const result = await AuthService.userLoginFromDb(loginInfo);
+  setRefreshTokenCookie(res, result.refreshToken);
+  sendResponse(res,{
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "User logged in successfully",
+    data:{
+        user: result.user,
+        accessToken: result.accessToken,
+    },  
+  })    
+});
+
 export const AuthController = {
   createUser,
+  userLogin,
 };  
