@@ -18,4 +18,7 @@ router.get('/:id',ProductController.getSingleProduct)
 //Update Product
 router.put('/:id',validateRequest(ProductValidation.updateProductValidationSchema),ProductController.updateProduct)
 
+//Delete Product
+router.delete('/:id',ProductController.deleteProduct)
+
 export const ProductRoutes = router

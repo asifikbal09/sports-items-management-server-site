@@ -29,9 +29,18 @@ const updateProductFromDB = async(id:string, updateInfo:Partial<TProduct>)=>{
     return result;
 }
 
+const deleteProductFromDB = async(id:string)=>{
+    const result = await Product.findByIdAndDelete(id);
+    if(!result){
+        throw new AppError(httpStatus.NOT_FOUND,'Product not found');
+    }
+    return result;
+}
+
 export const ProductServices = {
     createProductIntoDB,
     getAllProductsFromDB,
     getSingleProductFromDB,
-    updateProductFromDB
+    updateProductFromDB,
+    deleteProductFromDB
 }
