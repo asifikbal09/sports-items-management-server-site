@@ -3,6 +3,7 @@ import { UserRoutes } from "../modules/user/user.route";
 import { AuthRoutes } from "../modules/auth/auth.route";
 import { ProductRoutes } from "../modules/product/product.route";
 import { BranchRoutes } from "../modules/branch/branch.route";
+import { SalesRoutes } from "../modules/sales/sales.route";
 
 type TModuleRoutes = {
   path: string;
@@ -27,6 +28,10 @@ const moduleRoutes: TModuleRoutes[] = [
     {
       path: '/branches',
       route: BranchRoutes
+    },
+    {
+      path: '/sales',
+      route: SalesRoutes 
     }
 ];
 
