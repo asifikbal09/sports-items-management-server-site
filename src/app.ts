@@ -1,13 +1,12 @@
 import express, {
   Application,
-  ErrorRequestHandler,
   Request,
   Response,
 } from "express";
 import cors from "cors";
-import config from "./app/config";
 import router from "./app/routes";
 import httpStatus from "http-status";
+import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 
 const app: Application = express();
 
