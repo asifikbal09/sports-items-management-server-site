@@ -9,4 +9,8 @@ const router = Router()
 
 router.post('/',validateRequest(ProductValidation.createProductValidationSchema),ProductController.createProduct)
 
+router.get('/',ProductController.getAllProducts)
+
+router.get('/:id',ProductController.getSingleProduct)
+
 export const ProductRoutes = router
