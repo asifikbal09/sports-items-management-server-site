@@ -30,22 +30,7 @@ app.use((req: Request, res: Response) => {
   });
 });
 
-// Global Error Handler
-const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
-  let statusCode = httpStatus.INTERNAL_SERVER_ERROR;
-  let message = "Something went wrong!";
-  let errorMessage = "Something went wrong!";
-  let errorDetails = err;
-  let stack = config.NODE_ENV === "development" ? err?.stack : null;
 
-  return res.status(statusCode).json({
-    success: false,
-    message,
-    errorMessage,
-    errorDetails,
-    stack,
-  });
-};
 app.use(globalErrorHandler);
 
 export default app;
