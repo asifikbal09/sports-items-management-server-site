@@ -21,9 +21,17 @@ const getSingleProductFromDB = async(id:string)=>{
     return result;
 }
 
+const updateProductFromDB = async(id:string, updateInfo:Partial<TProduct>)=>{
+    const result = await Product.findByIdAndUpdate(id,updateInfo,{new:true});
+    if(!result){
+        throw new AppError(httpStatus.NOT_FOUND,'Product not found');
+    }
+    return result;
+}
 
 export const ProductServices = {
     createProductIntoDB,
     getAllProductsFromDB,
-    getSingleProductFromDB
+    getSingleProductFromDB,
+    updateProductFromDB
 }

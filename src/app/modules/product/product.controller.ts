@@ -8,7 +8,7 @@ const createProduct = catchAsync(async (req, res)=>{
     const result = await ProductServices.createProductIntoDB(productInfo)
 
     sendResponse(res,{
-        statusCode: httpStatus.OK,
+        statusCode: httpStatus.CREATED,
         success: true,
         message: "Product created successfully",
         data: result
@@ -36,8 +36,21 @@ const getSingleProduct = catchAsync(async (req, res)=>{
     })
 })
 
+const updateProduct = catchAsync(async (req, res)=>{
+    const { id } = req.params;
+    const updateInfo = req.body;
+    const result = await ProductServices.updateProductFromDB(id as string, updateInfo);
+    sendResponse(res,{
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Product updated successfully",
+        data: result
+    })
+})
+
 export const ProductController = {
     createProduct,
     getAllProducts,
-    getSingleProduct
+    getSingleProduct,
+    updateProduct
 }

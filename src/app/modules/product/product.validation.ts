@@ -1,4 +1,3 @@
-import e from "express";
 import z from "zod";
 
 const createProductValidationSchema = z.object({
@@ -17,11 +16,13 @@ const createProductValidationSchema = z.object({
     })
 })
 
+
+
 const updateProductValidationSchema = z.object({
      body:z.object({
         name:z.string().optional(),
-        price:z.number().optional(),
-        quantity:z.number().optional(),
+        price:z.number().min(0).optional(),
+        quantity:z.number().min(1).int().optional(),
         imgUrl:z.string().optional(),
         description:z.string().optional(),
         size:z.string().optional(),
