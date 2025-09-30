@@ -14,6 +14,18 @@ const salesInfo = req.body;
   })
 })
 
+const getAllSales = catchAsync(async (req, res) => {
+  const query = req.query;
+  const result = await SalesService.getAllSalesFromDB(query);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Sales retrieved successfully",
+    data: result
+  });
+});
+
 export const SalesController = {
-  createSales
+  createSales,
+  getAllSales
 }

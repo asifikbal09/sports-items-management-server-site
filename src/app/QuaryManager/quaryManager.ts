@@ -122,6 +122,60 @@ class QueryManager<T> {
     return this;
   }
 
+  filterByWeekly() {
+    const week = this.query.week;
+    if (week) {
+      const currentDate = new Date();
+      const pastDate = new Date();
+      pastDate.setDate(currentDate.getDate() - 7);
+
+      this.modelQuery = this.modelQuery.find({
+        createdAt: { $gte: pastDate, $lte: currentDate },
+      });
+    }
+    return this;
+  }
+
+  filterByMonthly() {
+    const month = this.query.month;
+    if (month) {
+      const currentDate = new Date();
+      const pastDate = new Date();
+      pastDate.setMonth(currentDate.getMonth() - 1);
+
+      this.modelQuery = this.modelQuery.find({
+        createdAt: { $gte: pastDate, $lte: currentDate },
+      });
+    }
+    return this;
+  }
+  filterByYearly() {
+    const year = this.query.year;
+    if (year) {
+      const currentDate = new Date();
+      const pastDate = new Date();
+      pastDate.setFullYear(currentDate.getFullYear() - 1);
+
+      this.modelQuery = this.modelQuery.find({
+        createdAt: { $gte: pastDate, $lte: currentDate },
+      });
+    }
+    return this;
+  }
+
+  filterByDaily() {
+    const day = this.query.day;
+    if (day) {
+      const currentDate = new Date();
+      const pastDate = new Date();
+      pastDate.setDate(currentDate.getDate() - 1);
+
+      this.modelQuery = this.modelQuery.find({
+        createdAt: { $gte: pastDate, $lte: currentDate },
+      });
+    }
+    return this;
+  }
 
 }
 

@@ -5,6 +5,10 @@ import { SalesController } from "./sales.controller";
 
 const router = Router();
 
+//Create Sales
 router.post('/',validateRequest(SalesValidation.createSalesValidationSchema),SalesController.createSales)
+
+//Get All Sales
+router.get('/',SalesController.getAllSales)
 
 export const SalesRoutes = router;
