@@ -39,7 +39,12 @@ const productSchema = new Schema<TProduct>({
     },
     brand:{
         type:String,
-    }
+    },
+    branchId: {
+        type: Schema.Types.ObjectId,
+        ref: "Branch",
+        required: true,
+    },
 },{
     timestamps:true,
 })

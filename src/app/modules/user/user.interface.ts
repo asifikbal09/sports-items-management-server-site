@@ -1,4 +1,4 @@
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 import { USER_ROLE } from "./user.constant";
 
 export type IUser = {
@@ -10,6 +10,7 @@ export type IUser = {
   address?: string;
   contactNo?: string;
   isPasswordChanged?: boolean;
+  branchId: Types.ObjectId;
 };
 
 export type TUserRoles = keyof typeof USER_ROLE;

@@ -39,6 +39,11 @@ const userSchema = new Schema<IUser, UserModel>(
       type: Boolean,
       default: false,
     },
+    branchId: {
+      type: Schema.Types.ObjectId,
+      ref: "Branch",
+      required: true,
+    },
   },
   {
     timestamps: true,

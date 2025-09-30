@@ -1,3 +1,5 @@
+import { Types } from "mongoose"
+
 export type TProduct ={
     name:string
     price:number
@@ -10,4 +12,5 @@ export type TProduct ={
     material?:string
     stype?:string //Sports types like football cricket etc...
     brand?:string
+    branchId: Types.ObjectId;
 }
