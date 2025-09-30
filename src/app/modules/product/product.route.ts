@@ -8,6 +8,9 @@ const router = Router()
 //Create Product
 router.post('/',validateRequest(ProductValidation.createProductValidationSchema),ProductController.createProduct)
 
+//Insert Many Products
+router.post('/insert-many', ProductController.insertManyProducts)  
+
 //Get All Products
 router.get('/',ProductController.getAllProducts)
 

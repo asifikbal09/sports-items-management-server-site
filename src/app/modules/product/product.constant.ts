@@ -1,0 +1,6 @@
+export const ProductSearchableFields = [
+  "name",
+  "description",
+  "brand",
+  "stype",
+];
