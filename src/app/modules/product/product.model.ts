@@ -16,7 +16,6 @@ const productSchema = new Schema<TProduct>({
     },
     imgUrl:{
         type:String,
-        required:true
     },
     description:{
         type:String,

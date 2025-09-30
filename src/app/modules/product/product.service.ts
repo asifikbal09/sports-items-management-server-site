@@ -1,15 +1,28 @@
 import AppError from "../../error/appError";
 import QueryManager from "../../QuaryManager/quaryManager";
+import { imageUploadToCloudinary } from "../../utils/imageSendToCloudinary";
 import { ProductSearchableFields } from "./product.constant";
 import { TProduct } from "./product.interface";
 import { Product } from "./product.model";
 import httpStatus from "http-status";
 
-const createProductIntoDB = async (productInfo: TProduct) => {
+// Create Product
+const createProductIntoDB = async (file: any, productInfo: TProduct) => {
+    // Generate a unique image name
+  const imageName = `image_${productInfo.name}_${Date.now()}`;
+  const path = file.path;
+  // Upload image to Cloudinary
+  const imgUrl = await imageUploadToCloudinary(imageName, path);
+  if (!imgUrl) {
+    throw new AppError(httpStatus.BAD_REQUEST, "Failed to upload image");
+  }
+  // Add image URL to product info
+  productInfo.imgUrl = imgUrl?.secure_url;
   const result = await Product.create(productInfo);
   return result;
 };
 
+// Insert Many Products
 const insertManyProductsIntoDB = async (products: TProduct[]) => {
   console.log("I am from service");
 
@@ -20,7 +33,6 @@ const insertManyProductsIntoDB = async (products: TProduct[]) => {
 };
 
 const getAllProductsFromDB = async (query: any) => {
-    
   const productQuery: any = new QueryManager(Product.find(), query)
     .search(ProductSearchableFields)
     .pagination()
@@ -51,7 +63,7 @@ const getAllProductsFromDB = async (query: any) => {
     filter.$or = ProductSearchableFields.map((field) => ({
       [field]: { $regex: query.searchTerm, $options: "i" },
     }));
-  } 
+  }
 
   const totalProducts = await Product.countDocuments(filter);
   console.log("Total products in DB:", totalProducts);

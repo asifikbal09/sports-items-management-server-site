@@ -13,5 +13,8 @@ export default{
     access_secret_key: process.env.ACCESS_SECRET_KEY,
     refresh_jwt_expires_in: process.env.REFRESH_JWT_EXPIRES_IN as StringValue,
     access_jwt_expires_in: process.env.ACCESS_JWT_EXPIRES_IN as StringValue,
-    salt_rounds: process.env.SALT_ROUNDS
+    salt_rounds: process.env.SALT_ROUNDS,
+    cloudinary_name: process.env.CLOUDINARY_CLOUD_NAME as string,
+    cloudinary_api_key: process.env.CLOUDINARY_API_KEY as string,
+    cloudinary_api_secret: process.env.CLOUDINARY_API_SECRET as string,
 }

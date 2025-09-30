@@ -2,7 +2,7 @@ export type TProduct ={
     name:string
     price:number
     quantity:number
-    imgUrl:string
+    imgUrl?:string
     description:string
     size?:string
     color?:string

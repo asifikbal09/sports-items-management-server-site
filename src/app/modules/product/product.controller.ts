@@ -5,8 +5,7 @@ import httpStatus from "http-status";
 
 const createProduct = catchAsync(async (req, res) => {
   const productInfo = req.body;
-  const result = await ProductServices.createProductIntoDB(productInfo);
-
+  const result = await ProductServices.createProductIntoDB(req.file, productInfo);
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
     success: true,
@@ -35,9 +34,9 @@ const getAllProducts = catchAsync(async (req, res) => {
     success: true,
     message: "Products retrieved successfully",
     meta:{
+        total: result.totalProducts,
         page: Number(query.page) || 1,
         limit: Number(query.limit) || 10,
-        total: result.totalProducts,
     },
     data: result.result,
   });
