@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 import { IUser, UserModel } from "./user.interface";
-import { userRolesEnum } from "./user.constant";
+import { USER_ROLE, userRolesEnum } from "./user.constant";
 import bcrypt from "bcrypt";
 import config from "../../config";
 
@@ -24,7 +24,7 @@ const userSchema = new Schema<IUser, UserModel>(
       type: String,
       enum: userRolesEnum,
       required: true,
-      default: "seller",
+      default: USER_ROLE.SELLER,
     },
     imgUrl: {
       type: String,

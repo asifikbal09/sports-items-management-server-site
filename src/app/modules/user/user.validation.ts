@@ -10,6 +10,7 @@ const createUserValidationSchema = z.object({
         imgUrl: z.string().optional(),
         address: z.string().max(200).optional(),
         contactNo: z.string().min(10).max(15).optional(),
+        branchId: z.string().min(24).max(24),
     })
 })
 

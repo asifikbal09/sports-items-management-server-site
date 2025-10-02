@@ -32,6 +32,7 @@ const insertManyProductsIntoDB = async (products: TProduct[]) => {
   return result;
 };
 
+// Get All Products
 const getAllProductsFromDB = async (query: any) => {
   const productQuery: any = new QueryManager(Product.find(), query)
     .search(ProductSearchableFields)
@@ -45,6 +46,7 @@ const getAllProductsFromDB = async (query: any) => {
     .filterByMaterial()
     .filterByColor();
 
+    // Build filter object based on query parameters
   const filter: any = {};
   if (query.size) filter.size = query.size;
   if (query.sportType) filter.stype = query.sportType;
@@ -65,9 +67,11 @@ const getAllProductsFromDB = async (query: any) => {
     }));
   }
 
-  const totalProducts = await Product.countDocuments(filter);
-  console.log("Total products in DB:", totalProducts);
   const result = await productQuery.modelQuery;
+
+  // Get total count of products matching the filter
+  const totalProducts = await Product.countDocuments(filter);
+
   return { result, totalProducts };
 };
 
@@ -79,6 +83,8 @@ const getSingleProductFromDB = async (id: string) => {
   return result;
 };
 
+
+// Update Product
 const updateProductFromDB = async (
   id: string,
   updateInfo: Partial<TProduct>
@@ -90,6 +96,7 @@ const updateProductFromDB = async (
   return result;
 };
 
+// Delete Product
 const deleteProductFromDB = async (id: string) => {
   const result = await Product.findByIdAndDelete(id);
   if (!result) {

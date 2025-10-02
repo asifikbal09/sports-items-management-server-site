@@ -1,7 +1,7 @@
-export const userRolesEnum = ["admin", "manager", "seller"] as const;
+export const userRolesEnum = ["ADMIN", "MANAGER", "SELLER"] as const;
 
 export const USER_ROLE ={
-    ADMIN:"admin",
-    MANAGER:"manager",
-    SELLER:"seller"
+    ADMIN:"ADMIN",
+    MANAGER:"MANAGER",
+    SELLER:"SELLER"
 } as const;
